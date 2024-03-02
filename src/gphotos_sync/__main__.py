@@ -298,6 +298,16 @@ class GooglePhotosSyncMain:
         default=None,
     )
     parser.add_argument(
+        "--use-filename-for-time",
+        action="store",
+        metavar="FMT",
+        help="Enable using created/modified date and time for files instead of metadata. "
+             "for example: filenames like `20240120_010250.jpg` "
+             "should be configured as `%%Y%%m%%d_%%H%%M%%S`. "
+             "formatting must match exactly to succeed.",
+        default=None,
+    )
+    parser.add_argument(
         "--port",
         help="Set the port for login flow redirect",
         type=int,
@@ -378,6 +388,7 @@ class GooglePhotosSyncMain:
             ntfs_override=args.ntfs,
             month_format=args.month_format,
             path_format=args.path_format,
+            filename_time=args.use_filename_for_time,
             image_timeout=args.image_timeout,
             video_timeout=args.video_timeout,
         )
