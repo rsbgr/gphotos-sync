@@ -46,6 +46,7 @@ class Settings:
 
     month_format: str
     path_format: str
+    filename_time: str
 
     image_timeout: int
     video_timeout: int

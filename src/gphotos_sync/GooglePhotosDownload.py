@@ -72,6 +72,7 @@ class GooglePhotosDownload(object):
         self.case_insensitive_fs: bool = settings.case_insensitive_fs
         self.video_timeout: int = settings.video_timeout
         self.image_timeout: int = settings.image_timeout
+        self.filename_date = settings.filename_time
 
         # attributes related to multi-threaded download
         self.download_pool = futures.ThreadPoolExecutor(max_workers=self.max_threads)
@@ -282,6 +283,12 @@ class GooglePhotosDownload(object):
             response.close()
             t_path.rename(local_full_path)
             create_date = Utils.safe_timestamp(media_item.create_date)
+            fd_format = self.filename_date
+            if fd_format:
+                try:
+                    create_date = datetime.strptime(filename.split('.')[0], fd_format)
+                except (ValueError, TypeError):
+                    log.error("File name/date format mismatch for file: %s. using metadata date", filename)
             os.utime(
                 str(local_full_path),
                 (
