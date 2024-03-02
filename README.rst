@@ -22,6 +22,11 @@ animations, panoramas, movies, effects and collages are also backed up.
 This software is read only and never modifies your cloud library in any way,
 so there is no risk of damaging your data.
 
+**This fork adds a new argument: --use-filename-for-time.**
+**when Google Photos API does not save the image UTC offset in the metadata,**
+**this parameter can use the image name (with date/time), to set the correct UTC offset**
+**of the image's created/modified time.**
+
 Warning: Google API Issues
 ==========================
 
